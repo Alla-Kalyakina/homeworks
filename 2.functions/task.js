@@ -1,17 +1,15 @@
-function getArrayParams(...arr) {
-  let min = arr[0], max = arr[0], avg = arr[0];
-  let countElementsArr = 1;
+function getArrayParams(arr) {
+  let min = arr[0], max = arr[0], sum = arr[0];
   for(let i = 1; i < arr.length; i++) {
-    countElementsArr++;
     if(arr[i] < min) {
       min = arr[i];
     }
     else if(arr[i] > max) {
       max = arr[i];
     }
-    avg += arr[i];
+    sum += arr[i];
   }
-  avg = avg / countElementsArr;
+  let avg = Number((sum / arr.length).toFixed(2));
   return { min: min, max: max, avg: avg };
 }
 
@@ -49,15 +47,16 @@ function worker2(arr) {
       max = arr[i];
     }
   }
-  return { difference: Math.abs(max - min) };
+  return Math.abs(max - min);
 }
 
 function makeWork (arrOfArr, func) {
   let max = func(arrOfArr[0]); 
    for(let i = 1; i < arrOfArr.length; i++) {
-    if(max < func(arrOfArr[i])) {
-      max = func(arrOfArr[i]);
+      const funcResult = func(arrOfArr[i]);
+      if (funcResult > max) {
+        max = funcResult;
+      }
     }
-  }
-  return { max: max } ;
+  return max;
 }
