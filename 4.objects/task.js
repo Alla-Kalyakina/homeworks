@@ -10,17 +10,16 @@ Student.prototype.setSubject = function (subjectName) {
 }
 
 Student.prototype.addMarks = function (...marksToAdd) {
-    if(this.marks === undefined) {
-        var arr1 = [...marksToAdd];
-            this.marks = [arr1];
-        }
+    if(this.marks !== undefined) {
+        this.marks.push(...marksToAdd);
+    }
 }
 
 Student.prototype.getAverage = function () {
-    if(this.marks === undefined || this.marks.length != 0) {
-        return Student.marks.reduce((acc, item, index, array) => {return acc += item/array.length}, 0);
+    if(this.marks !== undefined && this.marks.length != 0) {
+        return this.marks.reduce((acc, item, index, array) => {return acc += item/array.length}, 0);
     }
-    else return 0;
+    return 0;
 }
 
 Student.prototype.exclude = function (reason) {
