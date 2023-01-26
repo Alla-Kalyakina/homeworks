@@ -103,3 +103,25 @@ class Library {
 
 }
 
+class Student {
+    constructor (name) {
+        this.name = name;
+        this.arrSubjectMark = [];
+    }
+
+    addMark(mark, subject) {
+         let arrObject = {
+            mark : mark,
+            subject: subject
+        }
+        this.arrSubjectMark.push(arrObject);
+    }
+
+    getAverageBySubject(subject) {
+        this.arrSubjectMark.forEach(element => {element.subject === subject}).filter(el => {el.mark}).reduce((acc, item, array) => {return acc += item/array.length}, 0);
+    }
+
+    getAverage() {
+        this.arrSubjectMark.forEach(el => {el.mark}).reduce((acc, item, array) => {return acc += item/array.length}, 0);
+    }
+}
