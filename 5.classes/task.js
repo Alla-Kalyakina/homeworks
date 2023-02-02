@@ -86,19 +86,20 @@ class Library {
     }
 
     giveBookByName(bookName) {
-        for (let i = 0; i < this.books.length; i++) {
+       /* for (let i = 0; i < this.books.length; i++) {
             for (let j in this.books[i]) {
                 if(this.books[i][j] === bookName) {
-                    return this.books.splice(i, 1);
+                    return Object.assign({}, this.books.splice(i, 1));
                 }
             }
         }
-        return null;
-        /*let indexBook = this.books.findIndex(item => item.name === bookName);
-        if(indexBook != -1) {
-            return this.books.splice(indexBook, 1);
-        }
         return null;*/
+        let indexBook = this.books.findIndex(item => item.name === bookName);
+        if(indexBook != -1) {
+            let arr = this.books.splice(indexBook, 1);
+            return Object.assign({}, arr);
+        }
+        return null;
     }
 
 }
@@ -106,22 +107,28 @@ class Library {
 class Student {
     constructor (name) {
         this.name = name;
-        this.arrSubjectMark = [];
+        this.arrSubjectMark = {};
     }
 
     addMark(mark, subject) {
-         let arrObject = {
-            mark : mark,
-            subject: subject
-        }
-        this.arrSubjectMark.push(arrObject);
+        if(mark >= 2 && mark <= 5) {
+            if(subject in this.arrSubjectMark) {
+                this.arrSubjectMark.subject.push(mark);
+            }
+            else {
+                this.arrSubjectMark.subject = [];
+            }
+       }
     }
 
     getAverageBySubject(subject) {
-        this.arrSubjectMark.forEach(element => {element.subject === subject}).filter(el => {el.mark}).reduce((acc, item, array) => {return acc += item/array.length}, 0);
+        if(this.arrSubjectMark.subject === subject)
+            this.arrSubjectMark.subject.reduce((acc, item, array) => {return acc += item/array.length}, 0);
+        return 0;
     }
 
     getAverage() {
-        this.arrSubjectMark.forEach(el => {el.mark}).reduce((acc, item, array) => {return acc += item/array.length}, 0);
+        for (this.arrSubjectMark.subject in this.arrSubjectMark)
+        this.arrSubjectMark[this.arrSubjectMark.subject].reduce((acc, item) => {return acc += getAverageBySubject(item)}, 0);
     }
 }
