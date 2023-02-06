@@ -96,8 +96,8 @@ class Library {
         return null;*/
         let indexBook = this.books.findIndex(item => item.name === bookName);
         if(indexBook != -1) {
-            let arr = this.books.splice(indexBook, 1);
-            return Object.assign({}, arr);
+            delete this.books[indexBook];
+            return this.books[indexBook];
         }
         return null;
     }
@@ -112,23 +112,23 @@ class Student {
 
     addMark(mark, subject) {
         if(mark >= 2 && mark <= 5) {
-            if(subject in this.arrSubjectMark) {
-                this.arrSubjectMark.subject.push(mark);
+            if(this.arrSubjectMark.hasOwnProperty(subject)) {
+                this.arrSubjectMark[subject].push(mark);
             }
             else {
-                this.arrSubjectMark.subject = [];
+                this.arrSubjectMark[subject] = [];
             }
        }
     }
 
     getAverageBySubject(subject) {
-        if(this.arrSubjectMark.subject === subject)
-            this.arrSubjectMark.subject.reduce((acc, item, array) => {return acc += item/array.length}, 0);
+        if(this.arrSubjectMark.hasOwnProperty(subject)) 
+            this.arrSubjectMark.subject.reduce((acc, item, array) => {return acc += item/array.length}, 0); 
         return 0;
     }
 
     getAverage() {
-        for (this.arrSubjectMark.subject in this.arrSubjectMark)
+        for(this.arrSubjectMark.subject in this.arrSubjectMark)
         this.arrSubjectMark[this.arrSubjectMark.subject].reduce((acc, item) => {return acc += getAverageBySubject(item)}, 0);
     }
 }
