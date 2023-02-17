@@ -96,8 +96,8 @@ class Library {
         return null;*/
         let indexBook = this.books.findIndex(item => item.name === bookName);
         if(indexBook != -1) {
-            delete this.books[indexBook];
-            return this.books[indexBook];
+            let arr = this.books.splice(indexBook, 1);
+            return arr[0];
         }
         return null;
     }
@@ -121,7 +121,7 @@ class Student {
        }
     }
 
-    getAverageBySubject(subject) {
+   getAverageBySubject(subject) {
         if(this.arrSubjectMark.hasOwnProperty(subject)) 
             this.arrSubjectMark.subject.reduce((acc, item, array) => {return acc += item/array.length}, 0); 
         return 0;
