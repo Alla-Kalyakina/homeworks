@@ -129,6 +129,6 @@ class Student {
 
     getAverage() {
         for(this.arrSubjectMark.subject in this.arrSubjectMark)
-        this.arrSubjectMark[this.arrSubjectMark.subject].reduce((acc, item) => {return acc += getAverageBySubject(item)}, 0);
+        this.arrSubjectMark[this.arrSubjectMark.subject].reduce((acc, item) => {return acc += this.getAverageBySubject(item)}, 0);
     }
 }
